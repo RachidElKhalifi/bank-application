@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Gestione utenti</title>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+	</head>
+	<body>
+		<div class="container">
+			<h1>Gestione utenti</h1>
+			<a class="btn btn-secondary" href="./">Torna indietro </a>	
+			<a class="btn btn-primary" th:href="@{/gestioneUtenti/formUtente}">Inserisci nuovo utente</a>		
+			<h3>Lista anagrafiche</h3>
+			
+			 
+			
+			<table class="table">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>nome</th>
+						<th>cognome</th>
+						<th>cf</th>
+						<th>telefono</th>
+						<th>email</th>
+						<th>Citt&agrave;</th>
+					</tr>
+				</thead> 
+				<tbody>
+					
+					<!-- struttura da iterare per ogni persona -->
+					<tr th:each="persona : ${listaPersone}">
+						<td th:text="${persona.id}"></td>
+						<td th:text="${persona.nome}"></td> 
+						<td th:text="${persona.cognome}"></td>
+						<td th:text="${persona.cf}"></td>
+						<td th:text="${persona.telefono}"></td>
+						<td th:text="${persona.email}"></td>
+						<td th:text="${persona.citta.nome}"></td>
+						<td>
+							<a th:href="@{/gestioneUtenti/formUtente(id=${persona.id})}" class="btn btn-info">Modifica</a>
+							<a th:href="@{/gestioneUtenti/delete(id=${persona.id})}" class="btn btn-danger">Elimina</a>
+						</td>
+					</tr>
+				
+				
+				</tbody>
+				
+			</table>
+			
+		</div>
+	</body>
+</html>

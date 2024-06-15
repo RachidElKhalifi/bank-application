@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Form filiale</title>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+	</head>
+	<body>
+		<div class="container">
+			<h1>Gestione filiali</h1>
+              <a class="btn btn-secondary" href="/gestioneFiliali">Torna indietro</a>
+			<p>Inserimento nuova filiale</p>
+			
+			<form class="form" method="post" th:object="${filiale}" th:action="@{/gestioneFiliali/salvaFiliale}">
+					<div>
+						<label for="nome">Nome</label>
+						<input class="form-control" type="text" th:field="*{name}" required>
+					</div>
+					
+					
+					<div th:if="${filiale.banca != null}">
+				<label for="banca">Banca</label> <select id="banca" name="banca" class="form-control" required="required">
+					<option th:each="banca : ${banche}" th:value="${banca.id}"th:text="${banca.nome}"
+						    th:selected="${banca.id == filiale.banca.id}"></option>
+				</select>
+			</div>
+
+
+			<div th:if="${filiale.banca == null}">
+				<label for="banca">Banca</label> <select id="banca" name="banca" class="form-control" required="required">
+					<option th:each="banca : ${banche}" th:value="${banca.id}" th:text="${banca.nome}"></option>
+				</select>
+			</div>
+					
+					<div th:if="${filiale.citta != null}">
+				<label for="citta">Citt&agrave;</label> <select id="citta" name="citta" class="form-control" required="required">
+					<option th:each="citta : ${cities}" th:value="${citta.id}" th:text="${citta.nome}"
+						    th:selected="${citta.id == filiale.citta.id}"></option>
+				</select>
+			</div>
+
+
+			<div th:if="${filiale.citta == null}">
+				<label for="citta">Citt&agrave;</label> <select id="citta" name="citta" class="form-control" required="required">
+					<option th:each="citta : ${cities}" th:value="${citta.id}" th:text="${citta.nome}"></option>
+				</select>
+			</div>
+					
+					<div th:if="${filiale.direttore != null}">
+				<label for="direttore">Direttore</label> <select id="direttore" name="direttore" class="form-control" required="required">
+					<option th:each="direttore : ${persone}" th:value="${direttore.id}"
+						th:text="${direttore.nome}"
+						th:selected="${direttore.id == filiale.direttore.id}"></option>
+				</select>
+			</div>
+
+
+					<div th:if="${filiale.direttore == null}">
+				<label for="direttore">Direttore</label> <select id="direttore" name="direttore" class="form-control" required="required">
+					<option th:each="direttore : ${persone}" th:value="${direttore.id}" th:text="${direttore.nome}"></option>
+				</select>
+			</div>
+					<div>
+						<input type="submit" value="salva" class="btn btn-primary">
+					</div>				
+			</form>
+			
+		</div>
+	</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Gestine banche</title>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+	</head>
+	<body>
+		<div class="container">
+			<h1>Gestione Banche</h1>
+			<a class="btn btn-secondary" href="./">Torna indietro </a>	
+			<a class="btn btn-primary" th:href="@{/gestioneBanche/formBanca}">Inserisci nuova banca</a>		
+			<h3>Lista delle banche presenti</h3>
+			
+			<table class="table">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>nome</th> 
+					</tr>
+				</thead> 
+				<tbody>
+					
+					<!-- struttura da iterare per ogni banca -->
+					<tr th:each="banca : ${listaBanche}">
+						<td th:text="${banca.id}"></td>
+						<td th:text="${banca.nome}"></td> 
+						<td>
+							<a th:href="@{/gestioneBanche/formBanca(id=${banca.id})}" class="btn btn-info">Modifica</a>
+							<a th:href="@{/gestioneBanche/delete(id=${banca.id})}" class="btn btn-danger">Elimina</a>
+						</td>
+					</tr>
+				
+				
+				</tbody>
+				
+			</table>
+		</div>
+	</body>
+</html>

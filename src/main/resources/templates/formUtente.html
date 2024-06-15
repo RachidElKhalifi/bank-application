@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Form utente</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+		<h1>Gestione utente</h1>
+		<a class="btn btn-secondary" href="/gestioneUtenti">Torna indietro</a>
+		<p>Inserimento nuovo utente</p>
+
+		<form class="form" method="post" th:object="${persona}"
+			th:action="@{/gestioneUtenti/salvaPersona}">
+			<div>
+				<label for="nome">Nome</label> <input class="form-control"
+					type="text" th:field="*{nome}" required>
+			</div>
+			<div>
+				<label for="cognome">Cognome</label> <input class="form-control"
+					type="text" th:field="*{cognome}" required>
+			</div>
+			<div>
+				<label for="telefono">Telefono</label> <input class="form-control"
+					type="text" th:field="*{telefono}" required>
+			</div>
+			<div>
+				<label for="email">Email</label> <input class="form-control"
+					type="text" th:field="*{email}" required>
+			</div>
+			<div>
+				<label for="cf">CF</label> <input class="form-control" type="text"
+					th:field="*{cf}" required>
+			</div>
+
+			<div th:if="${persona.citta != null}">
+				<label for="citta">Citt&agrave;</label> <select id="citta"
+					name="citta" class="form-control" required="required">
+					<option th:each="citta : ${cities}" th:value="${citta.id}"
+						th:text="${citta.nome}"
+						th:selected="${citta.id == persona.citta.id}"></option>
+				</select>
+			</div>
+
+
+			<div th:if="${persona.citta == null}">
+				<label for="citta">Citt&agrave;</label> <select id="citta"
+					name="citta" class="form-control" required="required">
+					<option th:each="citta : ${cities}" th:value="${citta.id}"
+						th:text="${citta.nome}"></option>
+				</select>
+			</div>
+			<div>
+				<input type="submit" value="salva" class="btn btn-primary">
+			</div>
+		</form>
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Gestione filiali</title>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+	</head>
+	<body>
+		<div class="container">
+			<h1>Gestione Filiali</h1>
+			<a class="btn btn-secondary" href="./">Torna indietro</a>
+			<a class="btn btn-primary" th:href="@{/gestioneFiliali/formFiliale}">Inserisci nuova banca</a>		
+			
+			<p>Lista delle filiali presenti</p>
+		 
+			
+			<table class="table">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>nome</th>
+						<th>Citt&agrave;</th>
+						<th>Banca</th>
+						<th>Direttore</th>
+					</tr>
+				</thead> 
+				<tbody>
+					
+					<!-- struttura da iterare per ogni filiale -->
+					<tr th:each="fil : ${listaFiliali}">
+						<td th:text="${fil.id}"></td>
+						<td th:text="${fil.name}"></td> 
+						<td th:text="${fil.citta.nome}"></td> 
+						<td th:text="${fil.banca.nome}"></td> 
+						<td th:text="${fil.direttore.nome}"></td> 
+				        <td>
+							<a th:href="@{/gestioneFiliali/formFiliale(id=${fil.id})}" class="btn btn-info">Modifica</a>
+							<a th:href="@{/gestioneFiliali/delete(id=${fil.id})}" class="btn btn-danger">Elimina</a>
+						</td>
+					</tr>
+				
+				</tbody>
+				
+			</table>
+			
+		</div>
+	</body>
+</html>
